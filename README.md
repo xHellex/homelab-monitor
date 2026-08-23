@@ -4,6 +4,8 @@ Monitor de servicios en tiempo real para infraestructura self-hosted. Agrega el 
 
 **Stack:** Angular 21 · Spring Boot 4 · Java 21 · Tailwind CSS · TypeScript
 
+![Dashboard de Homelab Monitor](docs/dashboard.png)
+
 ---
 
 ## Qué resuelve
