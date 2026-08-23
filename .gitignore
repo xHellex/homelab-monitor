@@ -1,0 +1,23 @@
+# Spring Boot / Backend
+/homelab-monitor-backend/target/
+!/homelab-monitor-backend/.mvn/wrapper/maven-wrapper.jar
+/homelab-monitor-backend/.env
+
+# Angular / Frontend
+/homelab-monitor-frontend/.angular/
+/homelab-monitor-frontend/node_modules/
+/homelab-monitor-frontend/dist/
+/homelab-monitor-frontend/.env
+
+# IDEs y OS
+.idea/
+.vscode/
+*.DS_Store
+
+# Archivos de entorno y secretos locales
+.env
+.env.local
+application-local.properties
+
+# El properties real se sube porque ahora solo tiene variables de entorno (${...}), 
+# lo cual es seguro y es la práctica estándar en Spring Boot.
