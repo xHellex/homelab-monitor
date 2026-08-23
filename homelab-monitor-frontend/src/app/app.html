@@ -1,0 +1,94 @@
+<main class="min-h-screen bg-slate-950 text-emerald-400 p-4 font-mono select-none">
+  <!-- BANNER DE ALERTA (NETOPS STYLE) -->
+  @if (hasError()) {
+  <div
+    class="max-w-[1400px] mx-auto bg-rose-950/40 border border-rose-500/50 text-rose-200 px-4 py-3 rounded-lg flex items-center gap-3 mb-6 animate-pulse shadow-[0_0_15px_rgba(244,63,94,0.15)]"
+    role="alert">
+    <svg class="w-6 h-6 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    <div>
+      <strong class="font-bold tracking-widest uppercase text-sm">Alerta Crítica: Conexión perdida con el
+        Homelab</strong>
+      <span class="block sm:inline text-xs text-rose-400/80"> Mostrando caché local. Intentando reconectar a la
+        API...</span>
+    </div>
+  </div>
+  }
+  <!-- Cabecera estilo NetOps con datos de Proxmox -->
+  <header
+    class="max-w-[1400px] mx-auto mb-6 border border-emerald-500/30 bg-slate-900/50 p-4 rounded-lg flex flex-col md:flex-row justify-between items-center gap-4 shadow-[0_0_15px_rgba(16,185,129,0.05)]">
+    <div class="flex items-center gap-3">
+      <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+      <h1 class="text-xl font-bold tracking-wider text-white uppercase">FELOS // NETOPS [PROXMOX]</h1>
+    </div>
+
+    <!-- Métricas Globales del Host extraídas de Proxmox -->
+    <div class="flex items-center gap-4 text-xs font-mono">
+      <span class="bg-slate-950 border border-slate-800 px-3 py-1 rounded text-slate-300">
+        CPU HOST: <strong class="text-emerald-400">{{ hostStatus().cpuUsage || '0.0%' }}</strong>
+      </span>
+      <span class="bg-slate-950 border border-slate-800 px-3 py-1 rounded text-slate-300">
+        RAM: <strong class="text-sky-400">{{ hostStatus().ramUsed || '0M' }} / {{ hostStatus().ramTotal || '0G'
+          }}</strong>
+      </span>
+      <span class="bg-slate-950 border border-emerald-500/20 px-3 py-1 rounded text-emerald-300">
+        10s
+      </span>
+      <span class="bg-slate-950 border border-slate-800 px-3 py-1 rounded text-slate-300">
+        DISCO: <strong class="text-purple-400">{{ hostStatus().diskUsed || '0G / 0G' }}</strong>
+      </span>
+    </div>
+  </header>
+
+  <!-- Cuadrícula de Categorías (Estilo Compacto) -->
+  <div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+    @for (group of groupedServices(); track group.categoryName) {
+    <section class="bg-slate-900/80 border border-slate-800 rounded-lg p-4 flex flex-col justify-between shadow-lg">
+
+      <div>
+        <!-- Cabecera de Categoría -->
+        <div class="flex justify-between items-center mb-3 border-b border-slate-800 pb-2">
+          <h2 class="font-bold text-xs uppercase tracking-widest text-emerald-400 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+            {{ group.categoryName }}
+          </h2>
+          <span class="text-[11px] text-slate-400">
+            {{ group.onlineCount }}/{{ group.totalCount }}
+          </span>
+        </div>
+
+        <!-- Lista Compacta de Servicios -->
+        <div class="space-y-1.5">
+          @for (srv of group.services; track srv.id) {
+          <div
+            class="bg-slate-950/60 border border-slate-800/40 hover:border-slate-700 px-3 py-2 rounded flex justify-between items-center text-xs transition-colors">
+
+            <!-- Nombre y Estado (Punto indicador) -->
+            <div class="flex items-center gap-2 truncate">
+              <span class="w-1.5 h-1.5 rounded-full" [class.bg-emerald-400]="srv.status === 'ONLINE'"
+                [class.bg-rose-500]="srv.status === 'OFFLINE'"></span>
+              <span class="text-slate-200 truncate" title="{{ srv.name }}">{{ srv.name }}</span>
+            </div>
+
+            <!-- RAM o Protocolo a la derecha -->
+            <div class="flex items-center gap-3 font-mono">
+              @if (srv.ramUsage) {
+              <span class="text-emerald-300/90 text-[11px]">{{ srv.ramUsage }}</span>
+              } @else {
+              <span class="text-[10px] text-slate-500 uppercase">{{ srv.protocol }}</span>
+              }
+            </div>
+
+          </div>
+          }
+        </div>
+      </div>
+
+    </section>
+    }
+
+  </div>
+</main>
