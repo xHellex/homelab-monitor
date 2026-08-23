@@ -17,3 +17,16 @@ export interface CategoryGroup {
   onlineCount: number;
   totalCount: number;
 }
+
+export interface HostStatus {
+  status: string;
+  cpuUsage: string;
+  ramUsed: string;
+  ramTotal: string;
+  diskUsed: string;
+}
+
+export interface MonitorResponse {
+  services: ServiceNode[];
+  hostStatus: HostStatus;
+}
