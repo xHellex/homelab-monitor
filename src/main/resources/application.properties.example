@@ -18,8 +18,8 @@ portainer.token=ptr_tu_token_seguro_aqui
 # Proxmox VE API Configuration
 # ------------------------------------------
 # URL de tu nodo Proxmox (ej: https://192.168.1.200:8006/api2/json)
-proxmox.url=https://[IP_DE_TU_PROXMOX]:8006/api2/json
+proxmox.url=${PROXMOX_URL}
 # Nombre de tu nodo principal en Proxmox (ej: pve o proxmox)
-proxmox.node=proxmox
+proxmox.node=${PROXMOX_NODE}
 # API Token de Proxmox con rol PVEAuditor (Formato: PVEAPIToken=usuario@pam!IdToken=UUID)
 proxmox.token=PVEAPIToken=root@pam!NombreToken=tu-uuid-secreto-aqui

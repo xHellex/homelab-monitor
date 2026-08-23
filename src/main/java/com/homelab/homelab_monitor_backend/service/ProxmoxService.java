@@ -146,8 +146,7 @@ public class ProxmoxService {
             headers.set("Authorization", proxmoxToken);
             HttpEntity<String> entity = new HttpEntity<>(headers);
 
-            // Usamos "proxmox" como el nombre de tu nodo base según vimos en tus capturas
-            String nodeName = "proxmox";
+            String nodeName = proxmoxNode;
 
             for (String vmid : vmIds) {
                 // Solo procesamos los IDs que son números (los de Proxmox)
