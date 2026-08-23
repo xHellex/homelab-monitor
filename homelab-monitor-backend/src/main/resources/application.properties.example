@@ -1,0 +1,25 @@
+# ==========================================
+# HOMELAB MONITOR BACKEND CONFIGURATION
+# ==========================================
+spring.application.name=homelab-monitor-backend
+server.port=8081
+
+# ------------------------------------------
+# Portainer API Configuration
+# ------------------------------------------
+# URL de tu instancia de Portainer (Asegúrate de incluir el puerto, ej: http://192.168.1.100:9000)
+portainer.url=http://[IP_DE_TU_PORTAINER]:[PUERTO]
+# ID del endpoint local (por defecto suele ser 1, 2 o 3)
+portainer.endpoint.id=3
+# Token de acceso generado desde la UI de Portainer (My Account -> Access tokens)
+portainer.token=ptr_tu_token_seguro_aqui
+
+# ------------------------------------------
+# Proxmox VE API Configuration
+# ------------------------------------------
+# URL de tu nodo Proxmox (ej: https://192.168.1.200:8006/api2/json)
+proxmox.url=${PROXMOX_URL}
+# Nombre de tu nodo principal en Proxmox (ej: pve o proxmox)
+proxmox.node=${PROXMOX_NODE}
+# API Token de Proxmox con rol PVEAuditor (Formato: PVEAPIToken=usuario@pam!IdToken=UUID)
+proxmox.token=PVEAPIToken=root@pam!NombreToken=tu-uuid-secreto-aqui
