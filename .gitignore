@@ -21,3 +21,8 @@ application-local.properties
 
 # El properties real se sube porque ahora solo tiene variables de entorno (${...}), 
 # lo cual es seguro y es la práctica estándar en Spring Boot.
+# Contexto local de agentes (no versionar)
+CLAUDE.local.md
+
+# Artefactos de herramientas de modernizacion
+.github/modernize/
